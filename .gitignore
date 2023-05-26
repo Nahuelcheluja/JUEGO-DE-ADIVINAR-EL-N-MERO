@@ -1,52 +1,40 @@
-# Prerequisites
-*.d
+#include <stdio.h>
+#include <stdlib.h>
+#include <conio.h>
 
-# Object files
-*.o
-*.ko
-*.obj
-*.elf
+int main() {
+    int numberToGuess, guess, attempts = 0;
+    char playAgain;
 
-# Linker output
-*.ilk
-*.map
-*.exp
+    do {
+        // Generar un número aleatorio entre 1 y 100
+        srand(time(NULL));
+        numberToGuess = rand() % 100 + 1;
 
-# Precompiled Headers
-*.gch
-*.pch
+        printf("Adivina el numero secreto (entre 1 y 100).\n");
 
-# Libraries
-*.lib
-*.a
-*.la
-*.lo
+        do {
+            printf("Ingresa tu intento: ");
+            scanf("%d", &guess);
 
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
+            attempts++;
 
-# Executables
-*.exe
-*.out
-*.app
-*.i*86
-*.x86_64
-*.hex
+            if (guess > numberToGuess) {
+                printf("Demasiado alto. Intenta nuevamente.\n");
+            } else if (guess < numberToGuess) {
+                printf("Demasiado bajo. Intenta nuevamente.\n");
+            } else {
+                printf("¡Felicidades! Adivinaste el numero en %d intentos.\n", attempts);
+            }
+        } while (guess != numberToGuess);
 
-# Debug files
-*.dSYM/
-*.su
-*.idb
-*.pdb
+        printf("¿Quieres jugar otra vez? (s/n): ");
+        scanf(" %c", &playAgain);
 
-# Kernel Module Compile Results
-*.mod*
-*.cmd
-.tmp_versions/
-modules.order
-Module.symvers
-Mkfile.old
-dkms.conf
+        attempts = 0;
+    } while (playAgain == 's' || playAgain == 'S');
+
+    printf("Muy bien has ganado! soy nahuel y espero que te haya gustado\n");
+
+    return 0;
+}
